@@ -19,10 +19,9 @@ import javafx.scene.paint.Color;
 
 public class SpaceUI {
 
-//    private static final Effect NO_EFFECT = null;
+	private static final double MIN_GRAVITY_OBJECT_RADIUS = 5;
 
     private final Model model = Model.getInstance();
-//    private final Configuration configuration = Configuration.getInstance();
 
     private final Pane root;
 
@@ -59,7 +58,7 @@ public class SpaceUI {
         this.graphicsContext.setGlobalBlendMode(BlendMode.SRC_OVER);
 
         // XXX
-        this.model.addGravityObject(new GravityObject(350, 650, 30, 20));
+        this.model.addGravityObject(new GravityObject(600, 400, 30, 30));
 
         this.root.setOnMousePressed(e -> {
             this.dragStartX = e.getX();
@@ -96,13 +95,16 @@ public class SpaceUI {
                         this.dragStartX - this.mouseX,
                         this.dragStartY - this.mouseY
                     );
-                    GravityObject gravityObject = new GravityObject(
-                        this.dragStartX,
-                        this.dragStartY,
-                        radius,
-                        radius * 1.0 // mass
-                    );
-                    this.model.addGravityObject(gravityObject);
+                    
+                    if (radius > MIN_GRAVITY_OBJECT_RADIUS) {
+	                    GravityObject gravityObject = new GravityObject(
+	                        this.dragStartX,
+	                        this.dragStartY,
+	                        radius,
+	                        radius * 1.0 // mass
+	                    );
+	                    this.model.addGravityObject(gravityObject);
+                    }
                     break;
 
                 case PARTICLE:
