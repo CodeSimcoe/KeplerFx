@@ -24,11 +24,9 @@ public class SpaceFxMain extends Application {
     public void start(final Stage primaryStage) throws Exception {
 
         SpaceUI physicsUI = new SpaceUI();
-//        ConfigurationUI configurationUI = new ConfigurationUI();
 
         BorderPane root = new BorderPane();
         root.setCenter(physicsUI.getNode());
-//        root.setRight(configurationUI.getNode());
 
         Scene scene = new Scene(root, Configuration.UI_WIDTH, Configuration.UI_HEIGHT);
         primaryStage.setScene(scene);

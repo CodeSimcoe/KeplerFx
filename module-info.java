@@ -1,3 +1,3 @@
-module survivorfx {
+module spacefx {
 	requires javafx.graphics;
 }
