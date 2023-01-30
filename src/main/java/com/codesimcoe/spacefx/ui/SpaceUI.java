@@ -1,14 +1,14 @@
-package com.codesimcoe.physicsfx.ui;
+package com.codesimcoe.spacefx.ui;
 
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
-import com.codesimcoe.physicsfx.configuration.Configuration;
-import com.codesimcoe.physicsfx.domain.GravityObject;
-import com.codesimcoe.physicsfx.domain.Particle;
-import com.codesimcoe.physicsfx.drawing.DrawingUtil;
-import com.codesimcoe.physicsfx.model.Model;
+import com.codesimcoe.spacefx.configuration.Configuration;
+import com.codesimcoe.spacefx.domain.GravityObject;
+import com.codesimcoe.spacefx.domain.Particle;
+import com.codesimcoe.spacefx.drawing.DrawingUtil;
+import com.codesimcoe.spacefx.model.Model;
 
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;

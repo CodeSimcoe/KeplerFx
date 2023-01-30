@@ -1,4 +1,4 @@
-package com.codesimcoe.physicsfx.configuration;
+package com.codesimcoe.spacefx.configuration;
 
 public class Configuration {
 

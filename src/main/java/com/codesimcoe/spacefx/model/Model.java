@@ -1,10 +1,10 @@
-package com.codesimcoe.physicsfx.model;
+package com.codesimcoe.spacefx.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codesimcoe.physicsfx.domain.GravityObject;
-import com.codesimcoe.physicsfx.domain.Particle;
+import com.codesimcoe.spacefx.domain.GravityObject;
+import com.codesimcoe.spacefx.domain.Particle;
 
 public class Model {
 

@@ -1,4 +1,4 @@
-package com.codesimcoe.physicsfx.drawing;
+package com.codesimcoe.spacefx.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
 

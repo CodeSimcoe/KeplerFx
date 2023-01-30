@@ -1,4 +1,4 @@
-package com.codesimcoe.physicsfx.domain;
+package com.codesimcoe.spacefx.domain;
 
 import javafx.scene.paint.Color;
 

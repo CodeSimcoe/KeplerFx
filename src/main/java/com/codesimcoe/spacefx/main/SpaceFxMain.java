@@ -1,7 +1,7 @@
-package com.codesimcoe.physicsfx.main;
+package com.codesimcoe.spacefx.main;
 
-import com.codesimcoe.physicsfx.configuration.Configuration;
-import com.codesimcoe.physicsfx.ui.SpaceUI;
+import com.codesimcoe.spacefx.configuration.Configuration;
+import com.codesimcoe.spacefx.ui.SpaceUI;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

@@ -1,7 +1,7 @@
-package com.codesimcoe.physicsfx.ui;
+package com.codesimcoe.spacefx.ui;
 
-import com.codesimcoe.physicsfx.configuration.Configuration;
-import com.codesimcoe.physicsfx.model.Model;
+import com.codesimcoe.spacefx.configuration.Configuration;
+import com.codesimcoe.spacefx.model.Model;
 
 import javafx.beans.property.Property;
 import javafx.scene.Node;
