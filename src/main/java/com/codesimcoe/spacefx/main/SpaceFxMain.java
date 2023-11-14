@@ -2,7 +2,6 @@ package com.codesimcoe.spacefx.main;
 
 import com.codesimcoe.spacefx.configuration.Configuration;
 import com.codesimcoe.spacefx.ui.SpaceUI;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,39 +15,39 @@ import javafx.util.Duration;
 
 public class SpaceFxMain extends Application {
 
-    public static void main(final String[] args) {
-        launch(args);
-    }
+  public static void main(final String[] args) {
+    launch(args);
+  }
 
-    @Override
-    public void start(final Stage primaryStage) throws Exception {
+  @Override
+  public void start(final Stage primaryStage) throws Exception {
 
-        SpaceUI physicsUI = new SpaceUI();
+    SpaceUI physicsUI = new SpaceUI();
 
-        BorderPane root = new BorderPane();
-        root.setCenter(physicsUI.getNode());
+    BorderPane root = new BorderPane();
+    root.setCenter(physicsUI.getNode());
 
-        Scene scene = new Scene(root, Configuration.UI_WIDTH, Configuration.UI_HEIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    Scene scene = new Scene(root, Configuration.UI_WIDTH, Configuration.UI_HEIGHT);
+    primaryStage.setScene(scene);
+    primaryStage.show();
 
-        EventHandler<ActionEvent> update = event -> {
-            physicsUI.update();
-            physicsUI.draw();
-        };
+    EventHandler<ActionEvent> update = event -> {
+      physicsUI.update();
+      physicsUI.draw();
+    };
 
-        //
-        double fps = 30;
-        double frameDurationMs = 1000 / fps;
+    //
+    double fps = Configuration.FPS;
+    double frameDurationMs = 1_000 / fps;
 
-        Duration duration = Duration.millis(frameDurationMs);
-        Animation loop = new Timeline(new KeyFrame(duration, update));
-        loop.setCycleCount(Animation.INDEFINITE);
-        loop.play();
+    Duration duration = Duration.millis(frameDurationMs);
+    Animation loop = new Timeline(new KeyFrame(duration, update));
+    loop.setCycleCount(Animation.INDEFINITE);
+    loop.play();
 
-        primaryStage.setOnCloseRequest(e -> {
-            loop.stop();
-            System.exit(0);
-        });
-    }
+    primaryStage.setOnCloseRequest(e -> {
+      loop.stop();
+      System.exit(0);
+    });
+  }
 }

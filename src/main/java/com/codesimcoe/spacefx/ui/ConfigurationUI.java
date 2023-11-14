@@ -10,12 +10,11 @@ import javafx.scene.layout.VBox;
 
 public class ConfigurationUI {
 
-	private final VBox root;
+  private final VBox root;
 
-	public ConfigurationUI() {
+  public ConfigurationUI() {
 
-		Configuration configuration = Configuration.getInstance();
-		Model model = Model.getInstance();
+    Model model = Model.getInstance();
 
 //		Label liveParticlesLabel = new Label("Live Particles: ");
 //		Label liveParticlesValueLabel = new Label();
@@ -53,7 +52,7 @@ public class ConfigurationUI {
 //		});
 //		HBox clearBox = new HBox(5, clearGravityObjectsButton, clearParticlesButton);
 
-		this.root = new VBox(
+    this.root = new VBox(
 //			5,
 //			liveParticlesBox,
 //			particlesLifeLabel,
@@ -70,34 +69,34 @@ public class ConfigurationUI {
 //			effectsBox,
 //			clearLabel,
 //			clearBox
-		);
+    );
 //		this.root.setPrefWidth(Configuration.CONFIG_WIDTH);
-	}
+  }
 
-	private Slider newSlider(
-		final double min,
-		final double max,
-		final int minorTickCount,
-		final int majorTickUnit,
-		final Property<Number> property) {
+  private Slider newSlider(
+    final double min,
+    final double max,
+    final int minorTickCount,
+    final int majorTickUnit,
+    final Property<Number> property) {
 
-		Slider slider = new Slider();
+    Slider slider = new Slider();
 
-		slider.setMin(min);
-		slider.setMax(max);
+    slider.setMin(min);
+    slider.setMax(max);
 
-		slider.setMinorTickCount(minorTickCount);
-		slider.setMajorTickUnit(majorTickUnit);
+    slider.setMinorTickCount(minorTickCount);
+    slider.setMajorTickUnit(majorTickUnit);
 
-		slider.setShowTickMarks(true);
-		slider.setShowTickLabels(true);
+    slider.setShowTickMarks(true);
+    slider.setShowTickLabels(true);
 
-		slider.valueProperty().bindBidirectional(property);
+    slider.valueProperty().bindBidirectional(property);
 
-		return slider;
-	}
+    return slider;
+  }
 
-	public Node getNode() {
-		return this.root;
-	}
+  public Node getNode() {
+    return this.root;
+  }
 }
