@@ -89,8 +89,8 @@ public class Particle {
     this.vy += this.ay;
 
     // Position update depending on speed
-    this.x += this.vx;
-    this.y += this.vy;
+    this.x += (this.vx * Configuration.GAME_SPEED);
+    this.y += (this.vy * Configuration.GAME_SPEED);
   }
 
   public List<Position> getPositions() {

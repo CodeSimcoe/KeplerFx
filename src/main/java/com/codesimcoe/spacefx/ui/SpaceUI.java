@@ -10,6 +10,8 @@ import com.codesimcoe.spacefx.model.Model;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -55,7 +57,7 @@ public class SpaceUI {
     this.graphicsContext = canvas.getGraphicsContext2D();
     this.root.getChildren().add(canvas);
 
-//    this.graphicsContext.setGlobalBlendMode(BlendMode.SRC_OVER);
+    this.graphicsContext.setGlobalBlendMode(BlendMode.SRC_OVER);
     this.graphicsContext.setLineWidth(Configuration.DEFAULT_LINE_WIDTH);
     this.graphicsContext.setFont(Font.font("Arial", 16));
 
@@ -63,8 +65,19 @@ public class SpaceUI {
     this.model.addGravityObject(new GravityObject(600, 400, 30, 30));
 
     this.root.setOnMousePressed(e -> {
-      this.dragStartX = e.getX();
-      this.dragStartY = e.getY();
+
+      if (e.getButton() == MouseButton.MIDDLE) {
+        // Remove gravity object under cursor
+        this.model.getGravityObjets().removeIf(gravityObject -> {
+          double dx = gravityObject.x() - e.getX();
+          double dy = gravityObject.y() - e.getY();
+          double distance = GeometryUtil.distance(dx, dy);
+          return distance < gravityObject.radius();
+        });
+      } else {
+        this.dragStartX = e.getX();
+        this.dragStartY = e.getY();
+      }
     });
 
     this.root.setOnMouseDragged(e -> {
@@ -131,16 +144,6 @@ public class SpaceUI {
       this.creationMode = CreationMode.NONE;
     });
 
-//        // Configuration update
-//        this.configuration.getGaussianBlurEffect().addListener((observable, oldValue, newValue) -> {
-//            if (newValue) {
-//                // Effects
-//                this.graphicsContext.setEffect(new GaussianBlur());
-//            } else {
-//                this.graphicsContext.setEffect(NO_EFFECT);
-//            }
-//        });
-
     // Cache colors
     this.predictionColors = new Color[Configuration.PREDICTION_ITERATIONS];
     for (int i = 0; i < Configuration.PREDICTION_ITERATIONS; i++) {
@@ -180,7 +183,7 @@ public class SpaceUI {
         || particle.getY() > 2 * Configuration.CANVAS_HEIGHT
         || particle.getY() < -Configuration.CANVAS_HEIGHT) {
 
-//        iterator.remove();
+        iterator.remove();
       } else {
         this.applyAttraction(particle);
       }
@@ -326,16 +329,14 @@ public class SpaceUI {
       List<Position> positions = particle.getPositions();
       int size = positions.size();
 
+      this.graphicsContext.setEffect(Configuration.PARTICLE_EFFECT);
       this.graphicsContext.setStroke(particle.getColor());
       Position last = positions.getFirst();
-      double dx = last.x() - particle.getX();
-      double dy = last.y() - particle.getY();
-      double distance = GeometryUtil.distance(dx, dy);
       this.graphicsContext.strokeLine(
         particle.getX(),
         particle.getY(),
-        last.x() - dx / distance,
-        last.y() - dy / distance
+        last.x(),
+        last.y()
       );
 
       for (int i = 0; i < size - 1; i++) {
@@ -346,19 +347,15 @@ public class SpaceUI {
         Color color = particle.getHistoryColor(i);
         this.graphicsContext.setStroke(color);
 
-        // This is used to minimize segment overlapping
-        dx = p1.x() - p.x();
-        dy = p1.y() - p.y();
-        distance = GeometryUtil.distance(dx, dy);
-
         this.graphicsContext.strokeLine(
           p.x(),
           p.y(),
-          p1.x() - dx / distance,
-          p1.y() - dy / distance
+          p1.x(),
+          p1.y()
         );
       }
       this.graphicsContext.setLineWidth(Configuration.DEFAULT_LINE_WIDTH);
+      this.graphicsContext.setEffect(null);
     }
   }
 
