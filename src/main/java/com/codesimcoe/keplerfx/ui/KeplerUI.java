@@ -1,12 +1,12 @@
-package com.codesimcoe.spacefx.ui;
+package com.codesimcoe.keplerfx.ui;
 
-import com.codesimcoe.spacefx.configuration.Configuration;
-import com.codesimcoe.spacefx.domain.GravityObject;
-import com.codesimcoe.spacefx.domain.Particle;
-import com.codesimcoe.spacefx.domain.Particle.Position;
-import com.codesimcoe.spacefx.drawing.DrawingUtil;
-import com.codesimcoe.spacefx.geometry.GeometryUtil;
-import com.codesimcoe.spacefx.model.Model;
+import com.codesimcoe.keplerfx.configuration.Configuration;
+import com.codesimcoe.keplerfx.domain.GravityObject;
+import com.codesimcoe.keplerfx.domain.Particle;
+import com.codesimcoe.keplerfx.domain.Particle.Position;
+import com.codesimcoe.keplerfx.drawing.DrawingUtil;
+import com.codesimcoe.keplerfx.geometry.GeometryUtil;
+import com.codesimcoe.keplerfx.model.Model;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,12 +18,12 @@ import javafx.scene.text.Font;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
-public class SpaceUI {
+public class KeplerUI {
 
   private final Model model = Model.getInstance();
+  private final ColorGenerator colorGenerator = new RollColorGenerator(17);
 
   private final Pane root;
 
@@ -38,8 +38,6 @@ public class SpaceUI {
   private double mouseX;
   private double mouseY;
 
-  private final Random random = new Random();
-
   // Trajectory prediction
   private final double[] predictionXPoints = new double[Configuration.PREDICTION_ITERATIONS];
   private final double[] predictionYPoints = new double[Configuration.PREDICTION_ITERATIONS];
@@ -50,7 +48,7 @@ public class SpaceUI {
     GRAVITY_OBJECT
   }
 
-  public SpaceUI() {
+  public KeplerUI() {
     this.root = new Pane();
 
     Canvas canvas = new Canvas(Configuration.CANVAS_WIDTH, Configuration.CANVAS_HEIGHT);
@@ -127,9 +125,8 @@ public class SpaceUI {
           double vx = (this.dragStartX - this.mouseX) / factor;
           double vy = (this.dragStartY - this.mouseY) / factor;
 
-          // Random color
-          double hue = 360 * this.random.nextDouble();
-          Color color = Color.hsb(hue, 1.0, 0.95, 0.95);
+          // Generate a color
+          Color color = this.colorGenerator.generateColor();
 
           Particle particle = new Particle(this.mouseX, this.mouseY, vx, vy, color);
           this.model.addParticle(particle);
@@ -288,6 +285,7 @@ public class SpaceUI {
           double dy = this.predictionYPoints[i + 1] - this.predictionYPoints[i];
           double distance = GeometryUtil.distance(dx, dy);
 
+          // 0x5f3759df in the air
           this.graphicsContext.strokeLine(
             this.predictionXPoints[i],
             this.predictionYPoints[i],

@@ -1,4 +1,4 @@
-package com.codesimcoe.spacefx.domain;
+package com.codesimcoe.keplerfx.domain;
 
 public record GravityObject(
   double x,

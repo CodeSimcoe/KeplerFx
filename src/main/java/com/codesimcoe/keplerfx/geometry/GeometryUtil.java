@@ -1,4 +1,4 @@
-package com.codesimcoe.spacefx.geometry;
+package com.codesimcoe.keplerfx.geometry;
 
 public final class GeometryUtil {
 

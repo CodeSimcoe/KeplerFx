@@ -1,4 +1,4 @@
-package com.codesimcoe.spacefx.drawing;
+package com.codesimcoe.keplerfx.drawing;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -6,20 +6,6 @@ public final class DrawingUtil {
 
   private DrawingUtil() {
     // Non-instantiable
-  }
-
-  public static void fillCircle(
-    final double centerX,
-    final double centerY,
-    final double radius,
-    final GraphicsContext graphicsContext) {
-
-    double halfRadius = radius / 2;
-
-    double cx = centerX - halfRadius;
-    double cy = centerY - halfRadius;
-
-    graphicsContext.fillOval(cx, cy, radius, radius);
   }
 
   public static void drawCircle(

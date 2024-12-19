@@ -1,10 +1,10 @@
-package com.codesimcoe.spacefx.model;
+package com.codesimcoe.keplerfx.model;
+
+import com.codesimcoe.keplerfx.domain.GravityObject;
+import com.codesimcoe.keplerfx.domain.Particle;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.codesimcoe.spacefx.domain.GravityObject;
-import com.codesimcoe.spacefx.domain.Particle;
 
 public class Model {
 

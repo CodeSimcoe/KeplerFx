@@ -1,7 +1,7 @@
-package com.codesimcoe.spacefx.main;
+package com.codesimcoe.keplerfx.main;
 
-import com.codesimcoe.spacefx.configuration.Configuration;
-import com.codesimcoe.spacefx.ui.SpaceUI;
+import com.codesimcoe.keplerfx.configuration.Configuration;
+import com.codesimcoe.keplerfx.ui.KeplerUI;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,27 +13,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class SpaceFxMain extends Application {
+public class KeplerFxMain extends Application {
 
-  public static void main(final String[] args) {
+  public static void main(String[] args) {
     launch(args);
   }
 
   @Override
-  public void start(final Stage primaryStage) throws Exception {
+  public void start(final Stage primaryStage) {
 
-    SpaceUI physicsUI = new SpaceUI();
+    KeplerUI ui = new KeplerUI();
 
     BorderPane root = new BorderPane();
-    root.setCenter(physicsUI.getNode());
+    root.setCenter(ui.getNode());
 
     Scene scene = new Scene(root, Configuration.UI_WIDTH, Configuration.UI_HEIGHT);
     primaryStage.setScene(scene);
     primaryStage.show();
 
-    EventHandler<ActionEvent> update = event -> {
-      physicsUI.update();
-      physicsUI.draw();
+    EventHandler<ActionEvent> update = _ -> {
+      ui.update();
+      ui.draw();
     };
 
     //

@@ -1,6 +1,6 @@
-package com.codesimcoe.spacefx.domain;
+package com.codesimcoe.keplerfx.domain;
 
-import com.codesimcoe.spacefx.configuration.Configuration;
+import com.codesimcoe.keplerfx.configuration.Configuration;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
@@ -95,27 +95,5 @@ public class Particle {
 
   public List<Position> getPositions() {
     return this.positions;
-  }
-
-  private void performSphericWorldProcessing() {
-    // If the particle goes too far to right, pops left
-    if (this.x > Configuration.CANVAS_WIDTH) {
-      this.x = 0;
-    }
-
-    // Same for left
-    if (this.x < 0) {
-      this.x = Configuration.CANVAS_WIDTH;
-    }
-
-    // Same for top
-    if (this.y > Configuration.CANVAS_HEIGHT) {
-      this.y = 0;
-    }
-
-    // Same for bottom
-    if (this.y < 0) {
-      this.y = Configuration.CANVAS_HEIGHT;
-    }
   }
 }

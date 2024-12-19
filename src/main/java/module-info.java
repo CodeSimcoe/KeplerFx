@@ -1,6 +1,6 @@
-module spacefx {
+module keplerfx {
 	requires javafx.graphics;
 	requires javafx.controls;
 
-	exports com.codesimcoe.spacefx.main;
+	exports com.codesimcoe.keplerfx.main;
 }

@@ -1,4 +1,4 @@
-package com.codesimcoe.spacefx.configuration;
+package com.codesimcoe.keplerfx.configuration;
 
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.GaussianBlur;
@@ -13,11 +13,11 @@ public final class Configuration {
   public static final double CANVAS_WIDTH = 1_500;
   public static final double CANVAS_HEIGHT = 900;
 
-  public static final double UI_WIDTH = 1500;
+  public static final double UI_WIDTH = 1_500;
   public static final double UI_HEIGHT = 900;
 
   // Data
-  public static final int PREDICTION_ITERATIONS = 1000;
+  public static final int PREDICTION_ITERATIONS = 1_000;
   public static final double MIN_GRAVITY_OBJECT_RADIUS = 5;
 
   // Particle rendering
