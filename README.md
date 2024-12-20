@@ -1,8 +1,11 @@
 # Space gravity sandbox
 
-Left click & drag : Launch object\
-Right click & drag : Add gravity object\
-Middle click : remove gravity object
+Mouse controls :
+
+* Left click & drag : Launch object
+* Right click & drag : Add gravity object
+* Middle click : remove gravity object
+* Scroll : change next particle's color
 
 ![Kepler Fx preview](https://github.com/user-attachments/assets/abe6dab0-589b-4451-b7bc-3816114adf92)
 

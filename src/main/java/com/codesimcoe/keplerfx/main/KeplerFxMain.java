@@ -45,7 +45,7 @@ public class KeplerFxMain extends Application {
     loop.setCycleCount(Animation.INDEFINITE);
     loop.play();
 
-    primaryStage.setOnCloseRequest(e -> {
+    primaryStage.setOnCloseRequest(_ -> {
       loop.stop();
       System.exit(0);
     });

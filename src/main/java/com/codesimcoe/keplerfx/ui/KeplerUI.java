@@ -24,6 +24,7 @@ public class KeplerUI {
 
   private final Model model = Model.getInstance();
   private final ColorGenerator colorGenerator = new RollColorGenerator(17);
+  private Color nextColor = this.colorGenerator.generateColor();
 
   private final Pane root;
 
@@ -59,13 +60,13 @@ public class KeplerUI {
     this.graphicsContext.setLineWidth(Configuration.DEFAULT_LINE_WIDTH);
     this.graphicsContext.setFont(Font.font("Arial", 16));
 
-    // XXX
+    // Starting gravity object
     this.model.addGravityObject(new GravityObject(600, 400, 30, 30));
 
     this.root.setOnMousePressed(e -> {
 
       if (e.getButton() == MouseButton.MIDDLE) {
-        // Remove gravity object under cursor
+        // Remove gravity objects under cursor
         this.model.getGravityObjets().removeIf(gravityObject -> {
           double dx = gravityObject.x() - e.getX();
           double dy = gravityObject.y() - e.getY();
@@ -99,7 +100,7 @@ public class KeplerUI {
       }
     });
 
-    this.root.setOnMouseReleased(e -> {
+    this.root.setOnMouseReleased(_ -> {
 
       switch (this.creationMode) {
 
@@ -126,7 +127,7 @@ public class KeplerUI {
           double vy = (this.dragStartY - this.mouseY) / factor;
 
           // Generate a color
-          Color color = this.colorGenerator.generateColor();
+          Color color = this.pickColor();
 
           Particle particle = new Particle(this.mouseX, this.mouseY, vx, vy, color);
           this.model.addParticle(particle);
@@ -141,12 +142,20 @@ public class KeplerUI {
       this.creationMode = CreationMode.NONE;
     });
 
-    // Cache colors
+    this.root.setOnScroll(_ -> this.pickColor());
+
+    // Cache prediction colors
     this.predictionColors = new Color[Configuration.PREDICTION_ITERATIONS];
     for (int i = 0; i < Configuration.PREDICTION_ITERATIONS; i++) {
       double alpha = 1.0 - (1.0 * i / Configuration.PREDICTION_ITERATIONS);
       this.predictionColors[i] = Color.hsb(0, 0, 1.0, alpha);
     }
+  }
+
+  private Color pickColor() {
+    Color color = this.nextColor;
+    this.nextColor = this.colorGenerator.generateColor();
+    return color;
   }
 
   private void computeTrajectoryPrediction() {
@@ -308,20 +317,22 @@ public class KeplerUI {
     this.graphicsContext.setGlobalAlpha(1);
     this.graphicsContext.setFill(Color.GHOSTWHITE);
     this.graphicsContext.fillText("Live objects " + this.model.getParticles().size(), 20, 20);
+    this.graphicsContext.fillText("Next color : ", 20, 40);
+
+    // Next color
+    this.graphicsContext.setFill(this.nextColor);
+    this.graphicsContext.fillOval(115, 30, 10, 10);
   }
 
   private void drawParticle(final Particle particle) {
 
-    // If out of bounds
-    if (particle.getX() < 0
+    // Check if particle is within bounds (not drawing if not)
+    boolean outOfBounds = particle.getX() < 0
       || particle.getX() > Configuration.CANVAS_WIDTH
       || particle.getY() < 0
-      || particle.getY() > Configuration.CANVAS_HEIGHT) {
+      || particle.getY() > Configuration.CANVAS_HEIGHT;
 
-      // No drawing
-
-    } else {
-
+    if (!outOfBounds) {
       // History
       this.graphicsContext.setLineWidth(Configuration.THICK_LINE_WIDTH);
       List<Position> positions = particle.getPositions();
