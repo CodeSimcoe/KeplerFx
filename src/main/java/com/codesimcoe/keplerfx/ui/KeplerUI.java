@@ -86,17 +86,14 @@ public class KeplerUI {
 
       switch (e.getButton()) {
 
-        case PRIMARY:
+        case PRIMARY -> {
           this.creationMode = CreationMode.PARTICLE;
           CompletableFuture.runAsync(this::computeTrajectoryPrediction);
-          break;
+        }
 
-        case SECONDARY:
+        case SECONDARY -> {
           this.creationMode = CreationMode.GRAVITY_OBJECT;
-          break;
-
-        default:
-          break;
+        }
       }
     });
 
@@ -104,7 +101,7 @@ public class KeplerUI {
 
       switch (this.creationMode) {
 
-        case GRAVITY_OBJECT:
+        case GRAVITY_OBJECT -> {
           double radius = Math.hypot(
             this.dragStartX - this.mouseX,
             this.dragStartY - this.mouseY
@@ -119,9 +116,9 @@ public class KeplerUI {
             );
             this.model.addGravityObject(gravityObject);
           }
-          break;
+        }
 
-        case PARTICLE:
+        case PARTICLE -> {
           double factor = 10;
           double vx = (this.dragStartX - this.mouseX) / factor;
           double vy = (this.dragStartY - this.mouseY) / factor;
@@ -131,12 +128,7 @@ public class KeplerUI {
 
           Particle particle = new Particle(this.mouseX, this.mouseY, vx, vy, color);
           this.model.addParticle(particle);
-          break;
-
-        case NONE:
-        default:
-          break;
-
+        }
       }
 
       this.creationMode = CreationMode.NONE;
@@ -255,7 +247,7 @@ public class KeplerUI {
 
     switch (this.creationMode) {
 
-      case GRAVITY_OBJECT:
+      case GRAVITY_OBJECT -> {
 
         double radius = Math.hypot(
           this.dragStartX - this.mouseX,
@@ -271,9 +263,9 @@ public class KeplerUI {
           this.graphicsContext
         );
 
-        break;
+      }
 
-      case PARTICLE:
+      case PARTICLE -> {
 
         // Vector
         this.graphicsContext.setStroke(Color.LIGHTBLUE);
@@ -302,12 +294,9 @@ public class KeplerUI {
             this.predictionYPoints[i + 1] - dy / distance
           );
         }
+      }
 
-        break;
-
-      case NONE:
-      default:
-        break;
+      default -> {}
     }
 
     // Draw particles
@@ -321,7 +310,7 @@ public class KeplerUI {
 
     // Next color
     this.graphicsContext.setFill(this.nextColor);
-    this.graphicsContext.fillOval(115, 30, 10, 10);
+    this.graphicsContext.fillOval(115, 28, 14, 14);
   }
 
   private void drawParticle(final Particle particle) {
