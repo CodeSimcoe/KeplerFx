@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class KeplerFxMain extends Application {
 
-  public static void main(String[] args) {
+  void main(String[] args) {
     launch(args);
   }
 
