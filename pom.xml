@@ -6,7 +6,7 @@
 
     <properties>
         <java.version>25</java.version>
-        <javafx.version>25</javafx.version>
+        <javafx.version>26-ea+9</javafx.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
